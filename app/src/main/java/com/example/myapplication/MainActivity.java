@@ -16,4 +16,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v){
         Toast.makeText(this,"OkClick",Toast.LENGTH_LONG).show();
     }
+    public void onCansel(View v){
+        Toast.makeText(this,"CanselClick",Toast.LENGTH_LONG).show();
+    }
 }
