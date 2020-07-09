@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,11 +28,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void SendClick(){
         if(editText.getText().toString().length()>0){
-            Toast.makeText(this,editText.getText().toString(),Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, SecondActivity.class);
+            intent.putExtra("message",editText.getText().toString());
+            startActivityForResult(intent, 1);
         }
         else{
             Toast.makeText(this,"Введите текст!",Toast.LENGTH_LONG).show();
         }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
+        String res = data.getStringExtra("answer");
+        if (res.equals("Ok")) Toast.makeText(this, "Success!", Toast.LENGTH_LONG).show();
+        else editText.setText(null);
     }
 
 }

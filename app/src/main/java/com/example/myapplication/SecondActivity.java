@@ -2,7 +2,9 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,14 +20,33 @@ public class SecondActivity extends AppCompatActivity {
         textfrommain = findViewById(R.id.TextFromMainActivity);
         ok = findViewById(R.id.Ok);
         cansel = findViewById(R.id.Cansel);
+        String message = getIntent().getStringExtra("message");
+        textfrommain.setText(message);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OkClick();
+            }
+        });
+        cansel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CanselClick();
+            }
+        });
+
     }
     private void OkClick() {
-
-        Toast.makeText(this, "OkClick", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent();
+        intent.putExtra("answer","Ok" );
+        setResult(RESULT_OK, intent);
+        finish();
     }
     private void CanselClick() {
-
-        Toast.makeText(this, "OkClick", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent();
+        intent.putExtra("answer","Cansel" );
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 }
