@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void SendClick(){
-        if(editText.getText().toString().equals("")){
+        if(!editText.getText().toString().equals("")){
             Intent intent = new Intent(this, SecondActivity.class);
             intent.putExtra("message",editText.getText().toString());
             startActivityForResult(intent, 1);
