@@ -6,24 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout" />
+
+
+    <EditText
+        android:id="@+id/EditText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/EditText"
-            ></EditText>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        tools:text="text"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
-        <Button
-            android:id="@+id/Send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/send"></Button>
-    </LinearLayout>
+    <Button
+        android:id="@+id/Send"
+        style="@style/AppButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="@string/send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

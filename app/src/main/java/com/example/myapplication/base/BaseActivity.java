@@ -9,9 +9,9 @@ public class BaseActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     public void initToolbarWithNavigation(String title) {
-       // toolbar = findViewById(R.id);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(title);
-      //  toolbar.setNavigationIcon(R.drawable.ic_back_btn);
+       // toolbar.setNavigationIcon(R.drawable.ic_back_btn);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -21,7 +21,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void initToolbar(String title) {
-      //  toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(title);
     }
 
