@@ -2,12 +2,17 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
 import com.example.myapplication.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
@@ -26,8 +31,19 @@ public class MainActivity extends BaseActivity {
             }
         });
         initToolbar(getString(R.string.main_activity_title));
+
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+      //  Toast.makeText(this,"First",Toast.LENGTH_LONG).show();
+        if(item.getItemId() == R.id.menu_main_setting) {
+            Toast.makeText(this,"First1",Toast.LENGTH_LONG).show();
+
+        } else
+            Toast.makeText(this,"Second1",Toast.LENGTH_LONG).show();
+        return true;
+    }
     private void SendClick(){
         if(!editText.getText().toString().equals("")){
             Intent intent = new Intent(this, SecondActivity.class);
