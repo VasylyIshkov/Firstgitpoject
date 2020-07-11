@@ -3,4 +3,6 @@
     <string name="send">Send</string>
     <string name="ok">Ok</string>
     <string name="cansel">Cansel</string>
+    <string name="second_activity_title">SecondActivity</string>
+    <string name="main_activity_title">MainActivity</string>
 </resources>

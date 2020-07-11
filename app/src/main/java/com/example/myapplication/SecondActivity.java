@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SecondActivity extends AppCompatActivity {
+import com.example.myapplication.base.BaseActivity;
+
+public class SecondActivity extends BaseActivity {
 
     Button ok,cansel;
     TextView textfrommain;
@@ -34,6 +36,7 @@ public class SecondActivity extends AppCompatActivity {
                 CanselClick();
             }
         });
+        initToolbarWithNavigation(getString(R.string.second_activity_title));
 
     }
     private void OkClick() {

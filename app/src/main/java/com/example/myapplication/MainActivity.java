@@ -8,8 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.myapplication.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
  EditText editText;
  Button send;
     @Override
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 SendClick();
             }
         });
+        initToolbar(getString(R.string.main_activity_title));
     }
 
     private void SendClick(){
