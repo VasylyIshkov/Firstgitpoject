@@ -14,51 +14,54 @@ import com.example.myapplication.base.BaseActivity;
 
 public class SecondActivity extends BaseActivity {
 
-    Button ok,cansel;
-    TextView textfrommain;
+    Button ok, cansel;
+    TextView textFromMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        textfrommain = findViewById(R.id.TextFromMainActivity);
-        ok = findViewById(R.id.Ok);
-        cansel = findViewById(R.id.Cansel);
+        textFromMain = findViewById(R.id.text_from_main_activity);
+        ok = findViewById(R.id.ok);
+        cansel = findViewById(R.id.cansel);
         String message = getIntent().getStringExtra("message");
-        textfrommain.setText(message);
+        textFromMain.setText(message);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OkClick();
+                okClick();
             }
         });
         cansel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CanselClick();
+                canselClick();
             }
         });
         initToolbarWithNavigation(getString(R.string.second_activity_title));
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //  Toast.makeText(this,"First",Toast.LENGTH_LONG).show();
-        if(item.getItemId() == R.id.menu_main_setting) {
-            Toast.makeText(this,"First2",Toast.LENGTH_LONG).show();
+        if (item.getItemId() == R.id.menu_main_setting) {
+            Toast.makeText(this, "First2", Toast.LENGTH_LONG).show();
 
         } else
-            Toast.makeText(this,"Second2",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Second2", Toast.LENGTH_LONG).show();
         return true;
     }
-    private void OkClick() {
+
+    private void okClick() {
         Intent intent = new Intent();
-        intent.putExtra("answer","Ok" );
+        intent.putExtra("answer", "Ok");
         setResult(RESULT_OK, intent);
         finish();
     }
-    private void CanselClick() {
+
+    private void canselClick() {
         Intent intent = new Intent();
-        intent.putExtra("answer","Cansel" );
+        intent.putExtra("answer", "Cansel");
         setResult(RESULT_OK, intent);
         finish();
     }

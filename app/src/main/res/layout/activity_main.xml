@@ -12,25 +12,23 @@
 
 
     <EditText
-        android:id="@+id/EditText"
+        android:id="@+id/edit_text"
         android:layout_width="match_parent"
-        android:textSize="@dimen/text_size"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/default_margin"
-        tools:text="text"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        android:layout_margin="@dimen/default_margin"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:text="text" />
 
 
     <Button
-        android:id="@+id/Send"
+        android:id="@+id/send"
         style="@style/AppButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
+        android:layout_margin="@dimen/default_margin"
         android:text="@string/send"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditText" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

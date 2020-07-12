@@ -11,32 +11,37 @@
         layout="@layout/toolbar_layout" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            tools:text="text"
-            android:textSize="@dimen/text_size"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/TextFromMainActivity"/>
+    <TextView
+        android:id="@+id/text_from_main_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:textSize="@dimen/text_size"
+        tools:text="text" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_from_main_activity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_margin_big">
+
         <Button
+            android:id="@+id/ok"
+            style="@style/AppButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ok"
-            style="@style/AppButton"
-            android:id="@+id/Ok"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_margin="@dimen/default_margin"
+            android:text="@string/ok" />
+
         <Button
+            android:id="@+id/cansel"
+            style="@style/AppButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cansel"
-            style="@style/AppButton"
-            android:id="@+id/Cansel"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentLeft="true"
-            />
+            android:layout_margin="@dimen/default_margin"
+            android:text="@string/cansel" />
+    </LinearLayout>
 
 </RelativeLayout>

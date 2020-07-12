@@ -5,8 +5,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.R;
+
 public class BaseActivity extends AppCompatActivity {
 
     private Toolbar toolbar;

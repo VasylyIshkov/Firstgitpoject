@@ -16,18 +16,19 @@ import android.widget.Toolbar;
 import com.example.myapplication.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
- EditText editText;
- Button send;
+    EditText editText;
+    Button send;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editText = findViewById(R.id.EditText);
-        send = findViewById(R.id.Send);
+        editText = findViewById(R.id.edit_text);
+        send = findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SendClick();
+                sendClick();
             }
         });
         initToolbar(getString(R.string.main_activity_title));
@@ -36,24 +37,24 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      //  Toast.makeText(this,"First",Toast.LENGTH_LONG).show();
-        if(item.getItemId() == R.id.menu_main_setting) {
-            Toast.makeText(this,"First1",Toast.LENGTH_LONG).show();
+        if (item.getItemId() == R.id.menu_main_setting) {
+            Toast.makeText(this, "First1", Toast.LENGTH_LONG).show();
 
         } else
-            Toast.makeText(this,"Second1",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Second1", Toast.LENGTH_LONG).show();
         return true;
     }
-    private void SendClick(){
-        if(!editText.getText().toString().equals("")){
+
+    private void sendClick() {
+        if (!editText.getText().toString().equals("")) {
             Intent intent = new Intent(this, SecondActivity.class);
-            intent.putExtra("message",editText.getText().toString());
+            intent.putExtra("message", editText.getText().toString());
             startActivityForResult(intent, 1);
-        }
-        else{
-            Toast.makeText(this,"Введите текст!",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Введите текст!", Toast.LENGTH_LONG).show();
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
