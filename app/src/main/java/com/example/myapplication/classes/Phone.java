@@ -4,19 +4,14 @@ public class Phone {
     private String namePhone;
     private String modelCPU;
     private String ram;
-    //  private Image icon;
 
     //public Phone(String namePhone,String modelCPU,String ram,String url)
     public Phone(String namePhone, String modelCPU, String ram) {
         this.namePhone = namePhone;
         this.modelCPU = modelCPU;
         this.ram = ram;
-        //this.icon = loadImage(url);
     }
 
-    //    public Image getIcon() {
-    //        return icon;
-    //    }
 
     public String getRam() {
         return ram;
@@ -34,16 +29,4 @@ public class Phone {
         return "Phone - " + namePhone + "\nModel CPU - " + modelCPU + "\nRAM - " + ram + "\n";
     }
 
-//    public Image loadImage(String url)
-//    {
-//        try {
-//            BufferedImage img = ImageIO.read(new URL(url));
-//            return img;
-//        }
-//        catch (Exception ex)
-//        {
-//
-//        }
-//        Image img = new ImageIO.read("src/nokia_3310.png");
-//    }
 }
