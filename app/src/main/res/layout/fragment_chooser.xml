@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.FragmentChooser">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_xiaomi"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/xiaomi" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_samsung"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/samsung" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_iphone"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/iphone" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_realme"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/realme" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_huawei"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/huawei" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
