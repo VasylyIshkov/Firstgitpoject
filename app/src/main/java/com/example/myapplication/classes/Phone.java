@@ -1,13 +1,5 @@
 package com.example.myapplication.classes;
 
-import com.example.myapplication.R;
-
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
-
 public class Phone {
     private String namePhone;
     private String modelCPU;
