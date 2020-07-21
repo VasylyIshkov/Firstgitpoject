@@ -6,6 +6,9 @@
     <string name="second_activity_title">SecondActivity</string>
     <string name="main_activity_title">MainActivity</string>
     <string name="setting">Setting</string>
+    <string name="fragmentTest">FragmentTest</string>
+    <string name="fragmentChooser">FragmentChooser</string>
+    <string name="fragmentViewer">FragmentViewer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="xiaomi">Xiaomi</string>

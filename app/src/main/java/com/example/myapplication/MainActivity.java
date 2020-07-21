@@ -2,8 +2,11 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 
 import com.example.myapplication.base.BaseActivity;
 import com.example.myapplication.classes.Phone;
@@ -16,6 +19,7 @@ public class MainActivity extends BaseActivity {
     private FragmentChooser fragmentChooser;
     private FragmentChooseListener fragmentChooseListener;
     boolean inLandscapeMode;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,9 @@ public class MainActivity extends BaseActivity {
         initToolbar(getString(R.string.main_activity_title));
         inLandscapeMode = findViewById(R.id.fragment_viewer) != null;
 
+        menu = getToolbar().getMenu();
+        menu.clear();
+        menu.add("FragmentTest");
         fragmentChooser = (FragmentChooser) getSupportFragmentManager().findFragmentById(R.id.fragment_chooser);
         if (inLandscapeMode)
             fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_viewer);
@@ -56,12 +63,17 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onHuaweiClick() {
                 Phone huawei = new Phone("Huawei P30 Lite", "HiSilicon Kirin 710", "4Gb");
-                displaySelected(huawei.getInfo(),R.drawable.huawei_p30);
+                displaySelected(huawei.getInfo(), R.drawable.huawei_p30);
             }
         };
         fragmentChooser.setFragmentChooseListener(fragmentChooseListener);
     }
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent(MainActivity.this,FragmentTest.class);
+        startActivity(intent);
+        return true;
+    }
 
     private void displaySelected(String resPhoneInfo, @DrawableRes int resImageId) {
         if (inLandscapeMode) {

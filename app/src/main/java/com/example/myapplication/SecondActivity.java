@@ -13,7 +13,7 @@ public class SecondActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        initToolbarWithNavigation("SecondActivity");
+        initToolbarWithNavigation(getString(R.string.second_activity_title));
         fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_viewer);
         int resImageId = getIntent().getIntExtra(Constants.KEY_RES_ID, -1);
         String resPhoneInfo = getIntent().getStringExtra(Constants.PHONE_INFO_STR);
