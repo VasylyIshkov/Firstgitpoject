@@ -2,24 +2,34 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.adapters.PhoneRecyclerAdapter;
 import com.example.myapplication.base.BaseActivity;
 import com.example.myapplication.classes.Phone;
 import com.example.myapplication.fragment.FragmentChooser;
 import com.example.myapplication.fragment.FragmentViewer;
-import com.example.myapplication.listeners.FragmentChooseListener;
+import com.example.myapplication.listeners.OnPhoneRecyclerItemClickListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
     private FragmentViewer fragmentViewer;
     private FragmentChooser fragmentChooser;
-    private FragmentChooseListener fragmentChooseListener;
+    private OnPhoneRecyclerItemClickListener onPhoneRecyclerItemClickListener;
+    private PhoneRecyclerAdapter taskRecyclerAdapter;
+    RecyclerView recyclerView;
+    ArrayList<Phone> phoneArrayList;
     boolean inLandscapeMode;
-    private Menu menu;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,62 +37,33 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initToolbar(getString(R.string.main_activity_title));
         inLandscapeMode = findViewById(R.id.fragment_viewer) != null;
-
-        menu = getToolbar().getMenu();
-        menu.clear();
-        menu.add("FragmentTest");
         fragmentChooser = (FragmentChooser) getSupportFragmentManager().findFragmentById(R.id.fragment_chooser);
-        if (inLandscapeMode)
-            fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_viewer);
-        fragmentChooseListener = new FragmentChooseListener() {
+        onPhoneRecyclerItemClickListener = new OnPhoneRecyclerItemClickListener() {
             @Override
-            public void onXiaomiClick() {
-                Phone xiaomi = new Phone("Xiaomi Mi 10", "Qualcomm Snapdragon 865", "8Gb");
-                displaySelected(xiaomi.getInfo(), R.drawable.xiaomi_mi_10);
-            }
-
-            @Override
-            public void onSamsungClick() {
-                Phone samsung = new Phone("Samsung Galaxy M21", "Samsung Exynos 9611", "4Gb");
-                displaySelected(samsung.getInfo(), R.drawable.samsun);
-
-            }
-
-            @Override
-            public void onIphoneClick() {
-                Phone iphone = new Phone("iPhone SE 64GB", "Apple A13 Bionic", "3Gb");
-                displaySelected(iphone.getInfo(), R.drawable.apple_iphone_se);
-            }
-
-            @Override
-            public void onRelameClick() {
-                Phone relame = new Phone("Realme 6 Pro", " Qualcomm Snapdragon 720G", "8Gb");
-                displaySelected(relame.getInfo(), R.drawable.realme_6);
-            }
-
-            @Override
-            public void onHuaweiClick() {
-                Phone huawei = new Phone("Huawei P30 Lite", "HiSilicon Kirin 710", "4Gb");
-                displaySelected(huawei.getInfo(), R.drawable.huawei_p30);
+            public void onItemClick(View v, int position) {
+                displaySelected(fragmentChooser.getPhone(position));
             }
         };
-        fragmentChooser.setFragmentChooseListener(fragmentChooseListener);
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(MainActivity.this,FragmentTest.class);
-        startActivity(intent);
-        return true;
+        fragmentChooser.setOnTaskRecyclerItemClickListener(onPhoneRecyclerItemClickListener);
+        if (inLandscapeMode) {
+            fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_viewer);
+        }
+
+
     }
 
-    private void displaySelected(String resPhoneInfo, @DrawableRes int resImageId) {
+
+
+
+    private void displaySelected(Phone phone) {
+        Toast.makeText(this,"Main",Toast.LENGTH_SHORT).show();
         if (inLandscapeMode) {
-            fragmentViewer.displayResorce(resImageId, resPhoneInfo);
+            fragmentViewer.displayResorce(phone);
         } else {
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            intent.putExtra(Constants.KEY_RES_ID, resImageId);
-            intent.putExtra(Constants.PHONE_INFO_STR, resPhoneInfo);
-            startActivity(intent);
+//            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+//            intent.putExtra(Constants.KEY_RES_ID, phone);
+//            intent.putExtra(Constants.PHONE_INFO_STR, resPhoneInfo);
+//            startActivity(intent);
         }
     }
 

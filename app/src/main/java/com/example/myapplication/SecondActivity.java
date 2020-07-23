@@ -17,7 +17,7 @@ public class SecondActivity extends BaseActivity {
         fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_viewer);
         int resImageId = getIntent().getIntExtra(Constants.KEY_RES_ID, -1);
         String resPhoneInfo = getIntent().getStringExtra(Constants.PHONE_INFO_STR);
-        fragmentViewer.displayResorce(resImageId, resPhoneInfo);
+        //fragmentViewer.displayResorce(resImageId, resPhoneInfo);
     }
 
 }

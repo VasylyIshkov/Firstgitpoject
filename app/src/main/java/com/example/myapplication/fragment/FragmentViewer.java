@@ -1,15 +1,18 @@
 package com.example.myapplication.fragment;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.classes.Phone;
 
 
 public class FragmentViewer extends Fragment {
@@ -34,8 +37,9 @@ private AppCompatImageView imageView;
         imageView = view.findViewById(R.id.image_view);
         return view;
     }
-    public void displayResorce(int resId,String info){
-        imageView.setImageResource(resId);
-        textView.setText(info);
+    public void displayResorce(Phone phone){
+        Resources res = phone.getImageView().getResources();
+        imageView.setImageResource(res.hashCode());
+        textView.setText(phone.getInfo());
     }
 }

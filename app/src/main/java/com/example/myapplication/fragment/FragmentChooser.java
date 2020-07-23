@@ -4,17 +4,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.listeners.FragmentChooseListener;
+import com.example.myapplication.adapters.PhoneRecyclerAdapter;
+import com.example.myapplication.classes.Phone;
+import com.example.myapplication.listeners.OnPhoneRecyclerItemClickListener;
+
+import java.util.ArrayList;
 
 public class FragmentChooser extends Fragment {
 
-    private AppCompatButton xiaomiButton, samsungButton, iphoneButton, realmeButton, huaweiButton;
-    private FragmentChooseListener fragmentChooseListener;
+
+    private OnPhoneRecyclerItemClickListener onPhoneRecyclerItemClickListener;
+    private RecyclerView recyclerView;
+    private ArrayList<Phone> phoneArrayList;
+    private PhoneRecyclerAdapter phoneRecyclerAdapter;
+    View view;
 
     public FragmentChooser() {
         // Required empty public constructor
@@ -29,61 +41,45 @@ public class FragmentChooser extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chooser, container, false);
+        view = inflater.inflate(R.layout.fragment_chooser, container, false);
+        initArrayList();
         initFragment(view);
         return view;
 
     }
-
-    private void initFragment(View view) {
-        xiaomiButton = view.findViewById(R.id.btn_xiaomi);
-        samsungButton = view.findViewById(R.id.btn_samsung);
-        iphoneButton = view.findViewById(R.id.btn_iphone);
-        realmeButton = view.findViewById(R.id.btn_realme);
-        huaweiButton = view.findViewById(R.id.btn_huawei);
-        xiaomiButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fragmentChooseListener != null) {
-                    fragmentChooseListener.onXiaomiClick();
-                }
-            }
-        });
-        samsungButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fragmentChooseListener != null) {
-                    fragmentChooseListener.onSamsungClick();
-                }
-            }
-        });
-        iphoneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fragmentChooseListener != null) {
-                    fragmentChooseListener.onIphoneClick();
-                }
-            }
-        });
-        realmeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fragmentChooseListener != null) {
-                    fragmentChooseListener.onRelameClick();
-                }
-            }
-        });
-        huaweiButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fragmentChooseListener != null) {
-                    fragmentChooseListener.onHuaweiClick();
-                }
-            }
-        });
+public Phone getPhone(int position){
+        return  phoneArrayList.get(position);
+}
+    private void initFragment(final View view) {
+        recyclerView = view.findViewById(R.id.recycler_view);
+        phoneRecyclerAdapter = new PhoneRecyclerAdapter(phoneArrayList);
+        Toast.makeText(view.getContext(),"Chooser",Toast.LENGTH_SHORT).show();
+        phoneRecyclerAdapter.setListener(onPhoneRecyclerItemClickListener);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(phoneRecyclerAdapter);
     }
 
-    public void setFragmentChooseListener(FragmentChooseListener fragmentChooseListener) {
-        this.fragmentChooseListener = fragmentChooseListener;
+    public void setOnTaskRecyclerItemClickListener(OnPhoneRecyclerItemClickListener onTaskRecyclerItemClickListener) {
+        this.onPhoneRecyclerItemClickListener = onTaskRecyclerItemClickListener;
+    }
+
+    private void initArrayList() {
+        phoneArrayList = new ArrayList<>();
+        AppCompatImageView imageView = new AppCompatImageView(view.getContext());
+        imageView.setImageResource(R.drawable.xiaomi_mi_10);
+        Phone xiaomi = new Phone("Xiaomi Mi 10", "Qualcomm Snapdragon 865", "8Gb", imageView);
+        phoneArrayList.add(xiaomi);
+        imageView.setImageResource(R.drawable.samsun);
+        Phone samsung = new Phone("Samsung Galaxy M21", "Samsung Exynos 9611", "4Gb", imageView);
+        phoneArrayList.add(samsung);
+        imageView.setImageResource(R.drawable.apple_iphone_se);
+        Phone iphone = new Phone("iPhone SE 64GB", "Apple A13 Bionic", "3Gb", imageView);
+        phoneArrayList.add(iphone);
+        imageView.setImageResource(R.drawable.realme_6);
+        Phone relame = new Phone("Realme 6 Pro", " Qualcomm Snapdragon 720G", "8Gb", imageView);
+        phoneArrayList.add(relame);
+        imageView.setImageResource(R.drawable.huawei_p30);
+        Phone huawei = new Phone("Huawei P30 Lite", "HiSilicon Kirin 710", "4Gb", imageView);
+        phoneArrayList.add(huawei);
     }
 }

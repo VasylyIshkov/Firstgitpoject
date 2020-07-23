@@ -1,10 +1,8 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,16 +10,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.myapplication.base.BaseActivity;
-import com.example.myapplication.fragment.BlankFragment;
 import com.example.myapplication.fragment.FragmentChooser;
-import com.example.myapplication.fragment.FragmentViewer;
-import com.example.myapplication.fragment.BlankFragment;
-import com.google.android.material.tabs.TabLayout;
 
 public class FragmentTest extends BaseActivity {
 
     private FragmentChooser fragmentChooser;
-    private BlankFragment BlankFragment;
+   // private BlankFragment BlankFragment;
     private Menu menu;
 
     @Override
@@ -30,7 +24,7 @@ public class FragmentTest extends BaseActivity {
         setContentView(R.layout.activity_fragment_test);
         initToolbarWithNavigation(getString(R.string.fragmentTest));
         fragmentChooser = new FragmentChooser();
-        BlankFragment = new BlankFragment();
+      //  BlankFragment = new BlankFragment();
 
 
         menu = getToolbar().getMenu();
@@ -54,7 +48,7 @@ public class FragmentTest extends BaseActivity {
             }break;
             case 2: {
 
-                replaceFragment(BlankFragment);
+                //replaceFragment(BlankFragment);
             }break;
             default: {
 
