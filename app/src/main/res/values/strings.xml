@@ -6,7 +6,7 @@
     <string name="second_activity_title">SecondActivity</string>
     <string name="main_activity_title">MainActivity</string>
     <string name="setting">Setting</string>
-    <string name="fragmentTest">FragmentTest</string>
+    <string name="addPhone">AddPhone</string>
     <string name="fragmentChooser">FragmentChooser</string>
     <string name="fragmentViewer">FragmentViewer</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -16,4 +16,7 @@
     <string name="iphone">IPhone</string>
     <string name="realme">Realme</string>
     <string name="huawei">Huawei</string>
+    <string name="name_phone">Название телефона</string>
+    <string name="ram">Объем оперативной памяти</string>
+    <string name="model_cpu">Модель процессора</string>
 </resources>

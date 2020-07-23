@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import com.example.myapplication.classes.Phone;
-
 public class Constants {
     public final static String KEY_RES_ID = "KEY_RES_ID";
     public final static String NAME_PHONE = "NAME_PHONE";

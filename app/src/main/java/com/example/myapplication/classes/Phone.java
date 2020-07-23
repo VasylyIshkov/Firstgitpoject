@@ -34,4 +34,5 @@ public class Phone {
         return "Phone - " + namePhone + "\nModel CPU - " + modelCPU + "\nRAM - " + ram + "\n";
     }
 
+
 }

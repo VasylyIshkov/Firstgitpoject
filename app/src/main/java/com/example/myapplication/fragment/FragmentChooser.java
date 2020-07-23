@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.adapters.PhoneRecyclerAdapter;
 import com.example.myapplication.classes.Phone;
+import com.example.myapplication.listeners.OnFloatingActionButtonClickListener;
 import com.example.myapplication.listeners.OnPhoneRecyclerItemClickListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -23,6 +23,8 @@ public class FragmentChooser extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<Phone> phoneArrayList;
     private PhoneRecyclerAdapter phoneRecyclerAdapter;
+    private FloatingActionButton floatingActionButton;
+    private OnFloatingActionButtonClickListener onFloatingActionButtonClickListener;
 
     public FragmentChooser() {
         // Required empty public constructor
@@ -48,16 +50,35 @@ public class FragmentChooser extends Fragment {
         return phoneArrayList.get(position);
     }
 
+
     private void initFragment(final View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
+        floatingActionButton = view.findViewById(R.id.add_phone_action_button);
         phoneRecyclerAdapter = new PhoneRecyclerAdapter(phoneArrayList);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(phoneRecyclerAdapter);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onFloatingActionButtonClickListener != null)
+                    onFloatingActionButtonClickListener.onClick();
+            }
+        });
     }
 
 
     public void setOnPhoneRecyclerItemClickListener(OnPhoneRecyclerItemClickListener onPhoneRecyclerItemClickListener) {
         phoneRecyclerAdapter.setListener(onPhoneRecyclerItemClickListener);
+    }
+
+    public void setOnFloatingActionButtonClickListener(OnFloatingActionButtonClickListener onFloatingActionButtonClickListener) {
+        this.onFloatingActionButtonClickListener = onFloatingActionButtonClickListener;
+    }
+
+    public void addPhoneToArrayList(Phone phone) {
+        phoneArrayList.add(phone);
+        phoneRecyclerAdapter.notifyDataSetChanged();
+        recyclerView.smoothScrollToPosition(recyclerView.getBottom());
     }
 
     private void initArrayList() {
