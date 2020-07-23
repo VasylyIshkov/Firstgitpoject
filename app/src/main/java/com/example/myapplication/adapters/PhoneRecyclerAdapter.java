@@ -56,9 +56,11 @@ public class PhoneRecyclerAdapter extends RecyclerView.Adapter<PhoneRecyclerAdap
     public int getItemCount() {
         return phoneArrayList.size();
     }
+
     public void setListener(OnPhoneRecyclerItemClickListener listener) {
         this.onPhoneRecyclerItemClickListener = listener;
     }
+
     public ArrayList<Phone> getPhoneArrayList() {
         return phoneArrayList;
     }

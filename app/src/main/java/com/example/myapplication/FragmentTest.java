@@ -24,7 +24,6 @@ public class FragmentTest extends BaseActivity {
         setContentView(R.layout.activity_fragment_test);
         initToolbarWithNavigation(getString(R.string.fragmentTest));
         fragmentChooser = new FragmentChooser();
-      //  BlankFragment = new BlankFragment();
 
 
         menu = getToolbar().getMenu();
