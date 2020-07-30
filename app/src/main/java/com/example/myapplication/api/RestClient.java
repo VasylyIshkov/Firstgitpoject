@@ -22,7 +22,7 @@ public class RestClient {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
 
         Gson gson = new Gson();
-     //   Gson gson = new GsonBuilder().create(); // или так или делать десериалйзер
+        //   Gson gson = new GsonBuilder().create(); // или так или делать десериалйзер
 
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
