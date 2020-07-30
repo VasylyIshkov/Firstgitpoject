@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -108,32 +107,28 @@ public class MainActivity extends BaseActivity {
         RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new ApiCallback<List<CountryResponse>>() {
 
 
-
             @Override
             public void success(Response<List<CountryResponse>> response) {
                 if (!response.isSuccessful()) {
                     fragmentChooser.clearCountryItems();
                     ArrayList<CountryItem> tmpl = new ArrayList<>();
                     for (int i = 0;i<response.body().size();i++){
-                        tmpl.add(response.body().get(i).getRepoItems());
-                    }
+                            tmpl.add(response.body().get(i).getRepoItems());
+                        }
+
                     fragmentChooser.addAll(tmpl);
-                   // fragmentChooser.addAll(response.body().get(0).getRepoItems());
+                  //  fragmentChooser.addAll(response.body().getRepoItems());
                     fragmentChooser.getCountyRecyclerAdapter().notifyDataSetChanged();
-                    //  hideProgressBar;
+                    // hideProgressBar;
                 }
-                fragmentChooser.clearCountryItems();
                 ArrayList<CountryItem> tmpl = new ArrayList<>();
                 for (int i = 0;i<response.body().size();i++){
-                    tmpl.add(response.body().get(i).getRepoItems());
-                    Log.println(Log.DEBUG,"Read__",response.body().get(i).getRepoItems().getInfo());
+                        tmpl.add(response.body().get(i).getRepoItems());
                 }
                 fragmentChooser.addAll(tmpl);
+               // fragmentChooser.addAll(response.body().getRepoItems());
+                //  fragmentChooser.addAll(response.body().get(0).getRepoItems());
                 fragmentChooser.getCountyRecyclerAdapter().notifyDataSetChanged();
-              //  fragmentChooser.clearCountryItems();
-//               fragmentChooser.addAll(response.body().getRepoItems());
-              //  fragmentChooser.addAll(response.body().get(0).getRepoItems());
-               // fragmentChooser.getCountyRecyclerAdapter().notifyDataSetChanged();
             }
 
             @Override

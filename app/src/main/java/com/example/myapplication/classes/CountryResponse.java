@@ -9,16 +9,22 @@ public class CountryResponse {
     @SerializedName("incomplete_results")
     private boolean incompleteRequests;
 
-    @SerializedName("items")
-    private CountryItem repoItems;
-
-//    public List<CountryItem> getRepoItems() {
-////        return repoItems;
-////    }
+    @SerializedName("item")
+    private CountryItem countryItem;
 
     public CountryItem getRepoItems() {
-        return repoItems;
+        return countryItem;
     }
+
+    //private List<CountryItem> repoItems;
+
+//    public List<CountryItem> getRepoItems() {
+//        return repoItems;
+//    }
+
+//    public CountryItem getRepoItems() {
+//        return repoItems;
+//    }
 
     public long getTotalCount() {
         return totalCount;
