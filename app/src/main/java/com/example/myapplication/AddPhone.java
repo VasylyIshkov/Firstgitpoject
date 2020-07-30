@@ -1,12 +1,13 @@
 package com.example.myapplication;
 
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatEditText;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import com.example.myapplication.base.BaseActivity;
 
@@ -45,7 +46,7 @@ public class AddPhone extends BaseActivity {
         String newNamePhone = namePhone.getText().toString();
         String newRam = ram.getText().toString();
         String newModelCPU = modelCPU.getText().toString();
-        if (!newModelCPU.equals("") && !newNamePhone.equals(" ") && !newRam.equals(" ")) {
+        if (!TextUtils.isEmpty(newModelCPU) && TextUtils.isEmpty(newNamePhone) && TextUtils.isEmpty(newRam)) {
             Intent intent = new Intent();
             intent.putExtra(Constants.NAME_PHONE, newNamePhone);
             intent.putExtra(Constants.RAM, newRam);
