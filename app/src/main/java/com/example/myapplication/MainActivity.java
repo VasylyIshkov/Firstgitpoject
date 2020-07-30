@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -23,6 +24,9 @@ import com.example.myapplication.fragment.FragmentChooser;
 import com.example.myapplication.fragment.FragmentViewer;
 import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
 import com.example.myapplication.utils.KeyboardUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Response;
 
@@ -101,21 +105,35 @@ public class MainActivity extends BaseActivity {
     }
     private void loadRepos(String countryName) {
 //ShowProgressBar
-        RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new ApiCallback<CountryResponse>() {
+        RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new ApiCallback<List<CountryResponse>>() {
+
+
 
             @Override
-            public void success(Response<CountryResponse> response) {
+            public void success(Response<List<CountryResponse>> response) {
                 if (!response.isSuccessful()) {
                     fragmentChooser.clearCountryItems();
-                    fragmentChooser.addAll(response.body().getRepoItems());
+                    ArrayList<CountryItem> tmpl = new ArrayList<>();
+                    for (int i = 0;i<response.body().size();i++){
+                        tmpl.add(response.body().get(i).getRepoItems());
+                    }
+                    fragmentChooser.addAll(tmpl);
+                   // fragmentChooser.addAll(response.body().get(0).getRepoItems());
                     fragmentChooser.getCountyRecyclerAdapter().notifyDataSetChanged();
-                  //  hideProgressBar;
+                    //  hideProgressBar;
                 }
-
                 fragmentChooser.clearCountryItems();
-                fragmentChooser.addAll(response.body().getRepoItems());
+                ArrayList<CountryItem> tmpl = new ArrayList<>();
+                for (int i = 0;i<response.body().size();i++){
+                    tmpl.add(response.body().get(i).getRepoItems());
+                    Log.println(Log.DEBUG,"Read__",response.body().get(i).getRepoItems().getInfo());
+                }
+                fragmentChooser.addAll(tmpl);
                 fragmentChooser.getCountyRecyclerAdapter().notifyDataSetChanged();
-              //  hideProgressBar;
+              //  fragmentChooser.clearCountryItems();
+//               fragmentChooser.addAll(response.body().getRepoItems());
+              //  fragmentChooser.addAll(response.body().get(0).getRepoItems());
+               // fragmentChooser.getCountyRecyclerAdapter().notifyDataSetChanged();
             }
 
             @Override

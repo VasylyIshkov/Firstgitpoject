@@ -1,5 +1,7 @@
 package com.example.myapplication.api;
 
+import android.util.Log;
+
 import com.example.myapplication.classes.CountryErrorItem;
 
 import java.lang.annotation.Annotation;
@@ -34,6 +36,7 @@ public abstract class ApiCallback<T> implements Callback<T> {
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
+        Log.println(Log.DEBUG,"Errrrror",t.getMessage());
         failure(new CountryErrorItem("Unexpected error! Code: " + t.getMessage()));
     }
 }

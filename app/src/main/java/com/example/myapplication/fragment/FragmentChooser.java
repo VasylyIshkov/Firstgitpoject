@@ -52,6 +52,7 @@ public class FragmentChooser extends Fragment {
     }
 
     public void clearCountryItems() {
+        if (countryItems!=null)
         countryItems.clear();
     }
 

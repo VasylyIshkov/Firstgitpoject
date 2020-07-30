@@ -2,8 +2,6 @@ package com.example.myapplication.classes;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class CountryResponse {
     @SerializedName("total_count")
     private long totalCount;
@@ -12,9 +10,13 @@ public class CountryResponse {
     private boolean incompleteRequests;
 
     @SerializedName("items")
-    private List<CountryItem> repoItems;
+    private CountryItem repoItems;
 
-    public List<CountryItem> getRepoItems() {
+//    public List<CountryItem> getRepoItems() {
+////        return repoItems;
+////    }
+
+    public CountryItem getRepoItems() {
         return repoItems;
     }
 
@@ -30,9 +32,9 @@ public class CountryResponse {
         this.incompleteRequests = incompleteRequests;
     }
 
-    public void setRepoItems(List<CountryItem> repoItems) {
-        this.repoItems = repoItems;
-    }
+//    public void setRepoItems(List<CountryItem> repoItems) {
+//        this.repoItems = repoItems;
+//    }
 
     public void setTotalCount(long totalCount) {
         this.totalCount = totalCount;
