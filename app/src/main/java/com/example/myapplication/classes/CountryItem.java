@@ -63,4 +63,18 @@ public class CountryItem {
         return region;
     }
 
+    public String getInfo() {
+        StringBuilder lang = new StringBuilder();
+        for (int i = 0; i < languages.size(); i++) {
+            lang.append(languages.get(i).toString()).append("\n");
+        }
+        String info = "Название на родном языке - " + nativeName + "\n"
+                + "Регион - " + getRegion() + "\n"
+                + "Население - " + getPopulation() + "\n"
+                + "Площадь - " + getArea() + "\n"
+                + "Столица - " + getCapital() + "\n"
+                + "Языки - " + lang;
+        return info;
+    }
+
 }

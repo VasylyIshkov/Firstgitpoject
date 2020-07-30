@@ -7,28 +7,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
-import com.example.myapplication.classes.Phone;
-import com.example.myapplication.listeners.OnPhoneRecyclerItemClickListener;
+import com.example.myapplication.classes.CountryItem;
+import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
 
 import java.util.ArrayList;
 
 public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<Phone> phoneArrayList;
-    private OnPhoneRecyclerItemClickListener onPhoneRecyclerItemClickListener;
+    private ArrayList<CountryItem> countryItems;
+    private OnCountryRecyclerItemClickListener onCountryRecyclerItemClickListener;
     Context context;
 
-    public CountyRecyclerAdapter(ArrayList<Phone> phoneArrayList, Context context) {
-        this.phoneArrayList = phoneArrayList;
+    public CountyRecyclerAdapter(ArrayList<CountryItem> phoneArrayList, Context context) {
+        this.countryItems = phoneArrayList;
         this.context = context;
     }
-    public CountyRecyclerAdapter(ArrayList<Phone> phoneArrayList, Context context,OnPhoneRecyclerItemClickListener onPhoneRecyclerItemClickListener) {
-        this.phoneArrayList = phoneArrayList;
+
+    public CountyRecyclerAdapter(ArrayList<CountryItem> countryItems, Context context, OnCountryRecyclerItemClickListener onCountryRecyclerItemClickListener) {
+        this.countryItems = countryItems;
         this.context = context;
-        this.onPhoneRecyclerItemClickListener = onPhoneRecyclerItemClickListener;
+        this.onCountryRecyclerItemClickListener = onCountryRecyclerItemClickListener;
     }
 
     @NonNull
@@ -36,23 +39,25 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
     public CountyRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_list_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (onPhoneRecyclerItemClickListener != null) {
-//                    onPhoneRecyclerItemClickListener.onItemClick(view, viewHolder.getAdapterPosition());
-//                }
-//            }
-//
-//        });
+
         return viewHolder;
     }
-////////////////////часть адаптера уже есть остальное после модели
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.namePhone.setText(phoneArrayList.get(position).getNamePhone());
-        holder.ram.setText(phoneArrayList.get(position).getRam());
-        if (position == phoneArrayList.size() - 1) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        String name = countryItems.get(position).getName();
+        holder.name.setText(name);
+        String region = countryItems.get(position).getRegion();
+        holder.region.setText(region);
+        Glide.with(holder.flag).load(countryItems.get(position).getFlag()).placeholder(R.drawable.ic_arrow_back).into(holder.flag);
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onCountryRecyclerItemClickListener != null) {
+                    onCountryRecyclerItemClickListener.onItemClick(v, holder.getAdapterPosition());
+                }
+            }
+        });
+        if (position == countryItems.size() - 1) {
             holder.divider.setVisibility(View.INVISIBLE);
         } else {
             holder.divider.setVisibility(View.VISIBLE);
@@ -62,32 +67,35 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
 
     @Override
     public int getItemCount() {
-        return phoneArrayList.size();
+        return countryItems.size();
     }
 
-    public void setListener(OnPhoneRecyclerItemClickListener listener) {
-        this.onPhoneRecyclerItemClickListener = listener;
+    public void setListener(OnCountryRecyclerItemClickListener listener) {
+        this.onCountryRecyclerItemClickListener = listener;
     }
 
-    public ArrayList<Phone> getPhoneArrayList() {
-        return phoneArrayList;
+    public ArrayList<CountryItem> getCountryItems() {
+        return countryItems;
     }
 
-    public void setItems(ArrayList<Phone> phoneArrayList) {
-        this.phoneArrayList = phoneArrayList;
+    public void setItems(ArrayList<CountryItem> countryItems) {
+        this.countryItems = countryItems;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView namePhone;
-        TextView ram;
+        TextView name;
+        TextView region;
+        AppCompatImageView flag;
         View divider;
+        View container;
 
         public ViewHolder(View view) {
             super(view);
-            namePhone = view.findViewById(R.id.name_phone);
-            ram = view.findViewById(R.id.ram);
+            name = view.findViewById(R.id.name);
+            region = view.findViewById(R.id.region);
+            flag = view.findViewById(R.id.flag);
             divider = view.findViewById(R.id.divider);
-
+            container = view;
         }
     }
 
