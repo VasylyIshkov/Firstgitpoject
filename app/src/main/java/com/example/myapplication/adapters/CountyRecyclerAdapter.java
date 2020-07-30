@@ -1,5 +1,6 @@
 package com.example.myapplication.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,32 +15,39 @@ import com.example.myapplication.listeners.OnPhoneRecyclerItemClickListener;
 
 import java.util.ArrayList;
 
-public class PhoneRecyclerAdapter extends RecyclerView.Adapter<PhoneRecyclerAdapter.ViewHolder> {
+public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Phone> phoneArrayList;
     private OnPhoneRecyclerItemClickListener onPhoneRecyclerItemClickListener;
+    Context context;
 
-    public PhoneRecyclerAdapter(ArrayList<Phone> phoneArrayList) {
+    public CountyRecyclerAdapter(ArrayList<Phone> phoneArrayList, Context context) {
         this.phoneArrayList = phoneArrayList;
+        this.context = context;
+    }
+    public CountyRecyclerAdapter(ArrayList<Phone> phoneArrayList, Context context,OnPhoneRecyclerItemClickListener onPhoneRecyclerItemClickListener) {
+        this.phoneArrayList = phoneArrayList;
+        this.context = context;
+        this.onPhoneRecyclerItemClickListener = onPhoneRecyclerItemClickListener;
     }
 
     @NonNull
     @Override
-    public PhoneRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CountyRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_list_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onPhoneRecyclerItemClickListener != null) {
-                    onPhoneRecyclerItemClickListener.onItemClick(view, viewHolder.getAdapterPosition());
-                }
-            }
-
-        });
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (onPhoneRecyclerItemClickListener != null) {
+//                    onPhoneRecyclerItemClickListener.onItemClick(view, viewHolder.getAdapterPosition());
+//                }
+//            }
+//
+//        });
         return viewHolder;
     }
-
+////////////////////часть адаптера уже есть остальное после модели
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.namePhone.setText(phoneArrayList.get(position).getNamePhone());
