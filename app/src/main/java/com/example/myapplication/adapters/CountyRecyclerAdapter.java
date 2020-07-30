@@ -67,7 +67,9 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
 
     @Override
     public int getItemCount() {
+        if (countryItems!=null)
         return countryItems.size();
+        else return 0;
     }
 
     public void setListener(OnCountryRecyclerItemClickListener listener) {

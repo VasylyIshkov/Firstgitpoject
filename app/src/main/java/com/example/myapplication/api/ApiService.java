@@ -9,6 +9,6 @@ import retrofit2.http.Query;
 //надо с эти разобраться
 public interface ApiService {
     //???
-    @GET("/rest/v2/name/")
-    Call<CountryResponse> getUserRepos(@Query("q") String query);
+    @GET("/rest/v2/")
+    Call<CountryResponse> getUserRepos(@Query("name") String query);
 }

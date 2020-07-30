@@ -1,5 +1,6 @@
 package com.example.myapplication.fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.classes.Phone;
+import com.example.myapplication.classes.CountryItem;
 
 
 public class FragmentViewer extends Fragment {
@@ -37,8 +38,12 @@ public class FragmentViewer extends Fragment {
         return view;
     }
 
-    public void displayResorce(Phone phone) {
-        imageView.setImageResource(phone.getIdRes());
-        textView.setText(phone.getInfo());
+    public void displayResorce(CountryItem countryItem) {
+        imageView.setImageURI(Uri.parse(countryItem.getFlag()));
+        textView.setText(countryItem.getInfo());
+    }
+    public void displayResorce(String info,String uri){
+        imageView.setImageURI(Uri.parse(uri));
+        textView.setText(info);
     }
 }
