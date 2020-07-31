@@ -1,6 +1,7 @@
 package com.example.myapplication.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.List;
 public class FragmentChooser extends Fragment {
 
     private RecyclerView recyclerView;
+    private View view;
     private ArrayList<CountryItem> countryItems;
     private CountyRecyclerAdapter countyRecyclerAdapter;
     private OnCountryRecyclerItemClickListener onCountryRecyclerItemClickListener;
@@ -48,19 +50,38 @@ public class FragmentChooser extends Fragment {
     }
 
     public CountryItem getItem(int position) {
+        Log.println(Log.DEBUG, "Errr", countryItems.get(1).getInfo() + " get itm");
         return countryItems.get(position);
+
     }
 
     public void clearCountryItems() {
-        if (countryItems!=null)
         countryItems.clear();
     }
 
     public void addAll(List<CountryItem> countryItems) {
-        countryItems.addAll(countryItems);
+        try {
+
+
+            clearCountryItems();
+            //  countryItems = new ArrayList<>();
+            Log.println(Log.DEBUG, "Errr", countryItems.size() + " count2.0");
+            this.countryItems.addAll(countryItems);
+            //  countyRecyclerAdapter.notifyDataSetChanged();
+            Log.println(Log.DEBUG, "Errr", countryItems.size() + " count2");
+            countyRecyclerAdapter = new CountyRecyclerAdapter((ArrayList) this.countryItems, view.getContext(), onCountryRecyclerItemClickListener);
+            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            countyRecyclerAdapter.setListener(onCountryRecyclerItemClickListener);
+            recyclerView.setAdapter(countyRecyclerAdapter);
+        } catch (Exception ex) {
+            Log.println(Log.DEBUG, "Errr", ex.getMessage());
+        }
+
     }
 
     private void initFragment(final View view) {
+        this.view = view;
+        countryItems = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_view);
         countyRecyclerAdapter = new CountyRecyclerAdapter(countryItems, view.getContext(), onCountryRecyclerItemClickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -70,6 +91,7 @@ public class FragmentChooser extends Fragment {
 
 
     public void setOnCountryRecyclerItemClickListener(OnCountryRecyclerItemClickListener onCountryRecyclerItemClickListener) {
+        this.onCountryRecyclerItemClickListener = onCountryRecyclerItemClickListener;
         countyRecyclerAdapter.setListener(onCountryRecyclerItemClickListener);
     }
 

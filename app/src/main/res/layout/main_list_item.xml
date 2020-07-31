@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height"
     android:background="?android:attr/selectableItemBackground">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/flag"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:id="@+id/flag"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layerType="software"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/default_margin"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
         android:id="@+id/item_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_marginStart="@dimen/icon_size"
-        app:layout_constraintStart_toEndOf="@+id/flag"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flag"
         app:layout_constraintStart_toStartOf="@+id/flag"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/name"
-            tools:text = "name_phone"
-            android:layout_margin="@dimen/default_middle_margin_small"/>
+            android:layout_margin="@dimen/default_middle_margin_small"
+            tools:text="name_phone" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/region"
             android:layout_width="wrap_content"
@@ -41,6 +45,7 @@
 
 
     </LinearLayout>
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

@@ -13,20 +13,18 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.api.ApiCallback;
 import com.example.myapplication.api.RestClient;
 import com.example.myapplication.base.BaseActivity;
-import com.example.myapplication.classes.CountryErrorItem;
 import com.example.myapplication.classes.CountryItem;
-import com.example.myapplication.classes.CountryResponse;
 import com.example.myapplication.fragment.FragmentChooser;
 import com.example.myapplication.fragment.FragmentViewer;
 import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
 import com.example.myapplication.utils.KeyboardUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 
@@ -99,48 +97,36 @@ public class MainActivity extends BaseActivity {
             loadRepos(nameCountry.getText().toString());
         }
     }
+
     private void makeErrorToast(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
+
     private void loadRepos(String countryName) {
 //ShowProgressBar
-        RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new ApiCallback<List<CountryResponse>>() {
+        RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new Callback<List<CountryItem>>() {
 
 
             @Override
-            public void success(Response<List<CountryResponse>> response) {
+            public void onResponse(Call<List<CountryItem>> call, Response<List<CountryItem>> response) {
                 if (!response.isSuccessful()) {
+                    if (response.body() != null) {
+                        fragmentChooser.clearCountryItems();
+                        fragmentChooser.addAll(response.body());
+                    }
+                }
+                if (response.body() != null) {
                     fragmentChooser.clearCountryItems();
-                    ArrayList<CountryItem> tmpl = new ArrayList<>();
-                    for (int i = 0;i<response.body().size();i++){
-                            tmpl.add(response.body().get(i).getRepoItems());
-                        }
-
-                    fragmentChooser.addAll(tmpl);
-                  //  fragmentChooser.addAll(response.body().getRepoItems());
-                    fragmentChooser.getCountyRecyclerAdapter().notifyDataSetChanged();
-                    // hideProgressBar;
+                    fragmentChooser.addAll(response.body());
                 }
-                ArrayList<CountryItem> tmpl = new ArrayList<>();
-                for (int i = 0;i<response.body().size();i++){
-                        tmpl.add(response.body().get(i).getRepoItems());
-                }
-                fragmentChooser.addAll(tmpl);
-               // fragmentChooser.addAll(response.body().getRepoItems());
-                //  fragmentChooser.addAll(response.body().get(0).getRepoItems());
-                fragmentChooser.getCountyRecyclerAdapter().notifyDataSetChanged();
             }
 
+
             @Override
-            public void failure(CountryErrorItem countyErrorItem) {
-                if (TextUtils.isEmpty(countyErrorItem.getDocumentation_url())) {
-                      makeErrorToast(countyErrorItem.getMessage());
-                } else {
-                      makeErrorToast(countyErrorItem.getMessage() + ", Details: " + countyErrorItem.getDocumentation_url());
-                }
-                // hideProgressBar;
+            public void onFailure(Call<List<CountryItem>> call, Throwable t) {
 
             }
         });
     }
 }
+

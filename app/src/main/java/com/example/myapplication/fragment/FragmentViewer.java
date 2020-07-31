@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.classes.CountryItem;
 
@@ -40,10 +41,13 @@ public class FragmentViewer extends Fragment {
 
     public void displayResorce(CountryItem countryItem) {
         imageView.setImageURI(Uri.parse(countryItem.getFlag()));
+        Glide.with(imageView).load(countryItem.getFlag()).placeholder(R.drawable.ic_arrow_back).into(imageView);
         textView.setText(countryItem.getInfo());
     }
-    public void displayResorce(String info,String uri){
+
+    public void displayResorce(String info, String uri) {
         imageView.setImageURI(Uri.parse(uri));
+        Glide.with(imageView).load(uri).placeholder(R.drawable.ic_arrow_back).into(imageView);
         textView.setText(info);
     }
 }

@@ -1,13 +1,14 @@
 package com.example.myapplication.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +17,8 @@ import com.example.myapplication.classes.CountryItem;
 import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
 
 import java.util.ArrayList;
+
+import static android.util.Log.DEBUG;
 
 public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAdapter.ViewHolder> {
 
@@ -39,16 +42,21 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
     public CountyRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_list_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
-
         return viewHolder;
     }
+
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+
         String name = countryItems.get(position).getName();
         holder.name.setText(name);
         String region = countryItems.get(position).getRegion();
         holder.region.setText(region);
+        Log.println(DEBUG, "Errrr", countryItems.get(position).getFlag());
+
         Glide.with(holder.flag).load(countryItems.get(position).getFlag()).placeholder(R.drawable.ic_arrow_back).into(holder.flag);
+
+        //  holder.flag.setImageURI(Uri.parse(countryItems.get(position).getFlag()));
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,8 +75,8 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
 
     @Override
     public int getItemCount() {
-        if (countryItems!=null)
-        return countryItems.size();
+        if (countryItems != null)
+            return countryItems.size();
         else return 0;
     }
 
@@ -87,7 +95,7 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView region;
-        AppCompatImageView flag;
+        ImageView flag;
         View divider;
         View container;
 
