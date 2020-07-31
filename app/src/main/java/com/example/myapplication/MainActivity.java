@@ -13,8 +13,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.api.ApiCallback;
 import com.example.myapplication.api.RestClient;
 import com.example.myapplication.base.BaseActivity;
+import com.example.myapplication.classes.CountryErrorItem;
 import com.example.myapplication.classes.CountryItem;
 import com.example.myapplication.fragment.FragmentChooser;
 import com.example.myapplication.fragment.FragmentViewer;
@@ -23,8 +25,6 @@ import com.example.myapplication.utils.KeyboardUtils;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 
@@ -104,11 +104,11 @@ public class MainActivity extends BaseActivity {
 
     private void loadRepos(String countryName) {
 //ShowProgressBar
-        RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new Callback<List<CountryItem>>() {
+        RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new ApiCallback<List<CountryItem>>() {
 
 
             @Override
-            public void onResponse(Call<List<CountryItem>> call, Response<List<CountryItem>> response) {
+            public void success(Response<List<CountryItem>> response) {
                 if (!response.isSuccessful()) {
                     if (response.body() != null) {
                         fragmentChooser.clearCountryItems();
@@ -121,11 +121,16 @@ public class MainActivity extends BaseActivity {
                 }
             }
 
-
             @Override
-            public void onFailure(Call<List<CountryItem>> call, Throwable t) {
-
+            public void failure(CountryErrorItem countyErrorItem) {
+                if (TextUtils.isEmpty(countyErrorItem.getDocumentation_url())) {
+                    makeErrorToast(countyErrorItem.getMessage());
+                } else {
+                    makeErrorToast(countyErrorItem.getMessage() + ", Details: " + countyErrorItem.getDocumentation_url());
+                }
             }
+
+
         });
     }
 }
