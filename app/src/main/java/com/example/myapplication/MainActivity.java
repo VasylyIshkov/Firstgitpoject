@@ -103,7 +103,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void loadRepos(String countryName) {
-//ShowProgressBar
+        fragmentChooser.showProgressBlock();
         RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new ApiCallback<List<CountryItem>>() {
 
 
@@ -114,11 +114,13 @@ public class MainActivity extends BaseActivity {
                         fragmentChooser.clearCountryItems();
                         fragmentChooser.addAll(response.body());
                     }
+                    fragmentChooser.hideProgressBlock();
                 }
                 if (response.body() != null) {
                     fragmentChooser.clearCountryItems();
                     fragmentChooser.addAll(response.body());
                 }
+                fragmentChooser.hideProgressBlock();
             }
 
             @Override
@@ -128,6 +130,7 @@ public class MainActivity extends BaseActivity {
                 } else {
                     makeErrorToast(countyErrorItem.getMessage() + ", Details: " + countyErrorItem.getDocumentation_url());
                 }
+                fragmentChooser.hideProgressBlock();
             }
 
 

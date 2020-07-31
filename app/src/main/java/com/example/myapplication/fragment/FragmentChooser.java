@@ -21,6 +21,7 @@ import java.util.List;
 public class FragmentChooser extends Fragment {
 
     private RecyclerView recyclerView;
+    private View loader;
     private View view;
     private ArrayList<CountryItem> countryItems;
     private CountyRecyclerAdapter countyRecyclerAdapter;
@@ -61,8 +62,6 @@ public class FragmentChooser extends Fragment {
 
     public void addAll(List<CountryItem> countryItems) {
         try {
-
-
             clearCountryItems();
             //  countryItems = new ArrayList<>();
             Log.println(Log.DEBUG, "Errr", countryItems.size() + " count2.0");
@@ -86,9 +85,20 @@ public class FragmentChooser extends Fragment {
         countyRecyclerAdapter = new CountyRecyclerAdapter(countryItems, view.getContext(), onCountryRecyclerItemClickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(countyRecyclerAdapter);
+        loader = view.findViewById(R.id.loader);
 
     }
+    public void showProgressBlock() {
+        if (loader != null) {
+            loader.setVisibility(View.VISIBLE);
+        }
+    }
 
+    public void hideProgressBlock() {
+        if (loader != null) {
+            loader.setVisibility(View.GONE);
+        }
+    }
 
     public void setOnCountryRecyclerItemClickListener(OnCountryRecyclerItemClickListener onCountryRecyclerItemClickListener) {
         this.onCountryRecyclerItemClickListener = onCountryRecyclerItemClickListener;
