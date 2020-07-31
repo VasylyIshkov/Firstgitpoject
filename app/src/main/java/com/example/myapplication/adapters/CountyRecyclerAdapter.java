@@ -5,13 +5,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.classes.CountryItem;
 import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
@@ -54,8 +53,8 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
         holder.region.setText(region);
         Log.println(DEBUG, "Errrr", countryItems.get(position).getFlag());
 
-        Glide.with(holder.flag).load(countryItems.get(position).getFlag()).placeholder(R.drawable.ic_arrow_back).into(holder.flag);
-
+        // Glide.with(holder.flag).load(countryItems.get(position).getFlag()).placeholder(R.drawable.ic_arrow_back).into(holder.flag);
+        holder.flag.loadUrl(countryItems.get(position).getFlag());
         //  holder.flag.setImageURI(Uri.parse(countryItems.get(position).getFlag()));
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +94,7 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView region;
-        ImageView flag;
+        WebView flag;
         View divider;
         View container;
 

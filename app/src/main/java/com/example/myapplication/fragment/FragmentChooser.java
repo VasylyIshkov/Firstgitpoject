@@ -51,7 +51,7 @@ public class FragmentChooser extends Fragment {
     }
 
     public CountryItem getItem(int position) {
-        Log.println(Log.DEBUG, "Errr", countryItems.get(1).getInfo() + " get itm");
+     //   Log.println(Log.DEBUG, "Errr", countryItems.get(1).getInfo() + " get itm");
         return countryItems.get(position);
 
     }
