@@ -1,9 +1,49 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.adapters.HistoryRecyclerAdapter;
 import com.example.myapplication.base.BaseActivity;
+import com.example.myapplication.classes.ApplicationRequestManager;
+import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
+
+import java.util.ArrayList;
 
 public class AddPhone extends BaseActivity {
+    private RecyclerView recyclerView;
+    private ArrayList<String> historyList;
+    private OnCountryRecyclerItemClickListener listener = new OnCountryRecyclerItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+            Intent intent = new Intent();
+            intent.putExtra(Constants.CHOOSE_REQUEST, historyList.get(position));
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+    };
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fragment_test);
+        String tittle = getString(R.string.history);
+        initToolbarWithNavigation(tittle);
+        recyclerView = findViewById(R.id.history_list);
+        historyList = getIntent().getStringArrayListExtra(Constants.CHOOSE_REQUEST);
+        HistoryRecyclerAdapter adapter = new HistoryRecyclerAdapter(historyList, this, listener);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        adapter.setListener(listener);
+
+    }
 //    private AppCompatButton ok, cansel;
 //    private AppCompatEditText namePhone, ram, modelCPU;
 //

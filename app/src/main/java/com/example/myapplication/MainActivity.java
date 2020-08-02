@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.api.ApiCallback;
 import com.example.myapplication.api.RestClient;
 import com.example.myapplication.base.BaseActivity;
+import com.example.myapplication.classes.ApplicationRequestManager;
 import com.example.myapplication.classes.CountryErrorItem;
 import com.example.myapplication.classes.CountryItem;
+import com.example.myapplication.classes.Phone;
 import com.example.myapplication.fragment.FragmentChooser;
 import com.example.myapplication.fragment.FragmentViewer;
 import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
@@ -42,6 +45,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initToolbar(getString(R.string.main_activity_title));
+        initHistoryButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHistory();
+            }
+        });
         inLandscapeMode = findViewById(R.id.fragment_viewer) != null;
         fragmentChooser = (FragmentChooser) getSupportFragmentManager().findFragmentById(R.id.fragment_chooser);
         nameCountry = findViewById(R.id.country_name);
@@ -103,6 +112,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void loadRepos(String countryName) {
+        ApplicationRequestManager.setRequest(nameCountry.getText().toString(), this);
         fragmentChooser.showProgressBlock();
         RestClient.getsIstance().getApiService().getUserRepos(countryName).enqueue(new ApiCallback<List<CountryItem>>() {
 
@@ -135,6 +145,22 @@ public class MainActivity extends BaseActivity {
 
 
         });
+    }
+
+    private void showHistory() {
+        Intent intent = new Intent(this, AddPhone.class);
+        intent.putExtra(Constants.CHOOSE_REQUEST, ApplicationRequestManager.getArrayPRequest(this));
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_CANCELED) {
+            String result = data.getStringExtra(Constants.CHOOSE_REQUEST);
+            nameCountry.setText(result);
+            loadRepos(result);
+        }
     }
 }
 

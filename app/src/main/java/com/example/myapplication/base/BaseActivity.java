@@ -7,12 +7,19 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.myapplication.R;
 
 public class BaseActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+
+    public AppCompatButton initHistoryButton() {
+        AppCompatButton historyButton = findViewById(R.id.history);
+        historyButton.setVisibility(View.VISIBLE);
+        return historyButton;
+    }
 
     public void initToolbarWithNavigation(String title) {
         toolbar = findViewById(R.id.toolbar);
@@ -46,6 +53,7 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
     public Toolbar getToolbar() {
         return toolbar;
     }

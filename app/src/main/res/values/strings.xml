@@ -19,4 +19,5 @@
     <string name="name_phone">Название телефона</string>
     <string name="ram">Объем оперативной памяти</string>
     <string name="model_cpu">Модель процессора</string>
+    <string name="history">History</string>
 </resources>
