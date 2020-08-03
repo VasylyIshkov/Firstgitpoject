@@ -13,13 +13,12 @@ import com.example.myapplication.classes.CountryItem;
 import java.util.List;
 
 
-
 @Dao
 public interface CountryItemDao {
     @Query("SELECT * FROM countryItemsTable")
     LiveData<List<CountryItem>> getAll();
 
-    @Query("SELECT * FROM countryItemsTable WHERE id = :id")
+    @Query("SELECT * FROM countryItemsTable WHERE name = :id")
     LiveData<CountryItem> getById(long id);
 
     @Insert

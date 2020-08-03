@@ -51,7 +51,7 @@ public class FragmentChooser extends Fragment {
     }
 
     public CountryItem getItem(int position) {
-     //   Log.println(Log.DEBUG, "Errr", countryItems.get(1).getInfo() + " get itm");
+        //   Log.println(Log.DEBUG, "Errr", countryItems.get(1).getInfo() + " get itm");
         return countryItems.get(position);
 
     }
@@ -63,10 +63,8 @@ public class FragmentChooser extends Fragment {
     public void addAll(List<CountryItem> countryItems) {
         try {
             clearCountryItems();
-            //  countryItems = new ArrayList<>();
             Log.println(Log.DEBUG, "Errr", countryItems.size() + " count2.0");
             this.countryItems.addAll(countryItems);
-            //  countyRecyclerAdapter.notifyDataSetChanged();
             Log.println(Log.DEBUG, "Errr", countryItems.size() + " count2");
             countyRecyclerAdapter = new CountyRecyclerAdapter((ArrayList) this.countryItems, view.getContext(), onCountryRecyclerItemClickListener);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -88,6 +86,7 @@ public class FragmentChooser extends Fragment {
         loader = view.findViewById(R.id.loader);
 
     }
+
     public void showProgressBlock() {
         if (loader != null) {
             loader.setVisibility(View.VISIBLE);

@@ -33,6 +33,7 @@ public abstract class ApiCallback<T> implements Callback<List<CountryItem>> {
             success(response);
         }
     }
+
     @Override
     public void onFailure(Call<List<CountryItem>> call, Throwable t) {
         failure(new CountryErrorItem("Unexpected error! Info: " + t.getMessage()));

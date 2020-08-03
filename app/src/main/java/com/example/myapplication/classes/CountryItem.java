@@ -1,31 +1,50 @@
 package com.example.myapplication.classes;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.myapplication.database.UriConverter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+@Entity(tableName = "countryItemsTable")
+@TypeConverters(UriConverter.class)
 public class CountryItem {
     //for RecyclerView
+    @PrimaryKey
     @SerializedName("name")
     @Expose
+    @NonNull
     private String name;
+
+    @ColumnInfo(name = "region")
     @SerializedName("region")
     @Expose
     private String region;
     //flag = url_flag
+    @ColumnInfo(name = "flag")
     @SerializedName("flag")
     @Expose
     private String flag;
 
     //for SecondFragment
+    @ColumnInfo(name = "nativeName")
     @SerializedName("nativeName")
     @Expose
     private String nativeName;
+    @ColumnInfo(name = "population")
     @SerializedName("population")
     @Expose
     private long population;
+    @ColumnInfo(name = "area")
     @SerializedName("area")
     @Expose
     private long area;
+    @ColumnInfo(name = "capital")
     @SerializedName("capital")
     @Expose
     private String capital;

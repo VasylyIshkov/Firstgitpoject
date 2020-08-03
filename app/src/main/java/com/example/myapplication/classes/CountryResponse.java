@@ -16,16 +16,6 @@ public class CountryResponse {
         return countryItem;
     }
 
-    //private List<CountryItem> repoItems;
-
-//    public List<CountryItem> getRepoItems() {
-//        return repoItems;
-//    }
-
-//    public CountryItem getRepoItems() {
-//        return repoItems;
-//    }
-
     public long getTotalCount() {
         return totalCount;
     }
@@ -37,10 +27,6 @@ public class CountryResponse {
     public void setIncompleteRequests(boolean incompleteRequests) {
         this.incompleteRequests = incompleteRequests;
     }
-
-//    public void setRepoItems(List<CountryItem> repoItems) {
-//        this.repoItems = repoItems;
-//    }
 
     public void setTotalCount(long totalCount) {
         this.totalCount = totalCount;

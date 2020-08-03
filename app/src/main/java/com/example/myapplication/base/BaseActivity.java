@@ -1,15 +1,15 @@
 package com.example.myapplication.base;
 
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.myapplication.R;
+import com.example.myapplication.app.FirstProjectApp;
+import com.example.myapplication.database.AppDatabase;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -58,4 +58,7 @@ public class BaseActivity extends AppCompatActivity {
         return toolbar;
     }
 
+    public AppDatabase getDatabase() {
+        return ((FirstProjectApp) getApplication()).getAppDatabase();
+    }
 }

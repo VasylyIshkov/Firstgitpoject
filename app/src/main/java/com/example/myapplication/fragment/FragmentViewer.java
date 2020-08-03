@@ -38,14 +38,14 @@ public class FragmentViewer extends Fragment {
     }
 
     public void displayResorce(CountryItem countryItem) {
-       imageView.loadUrl(countryItem.getFlag());
-       // Glide.with(imageView).load(countryItem.getFlag()).placeholder(R.drawable.ic_arrow_back).into(imageView);
+        imageView.loadUrl(countryItem.getFlag());
+        // Glide.with(imageView).load(countryItem.getFlag()).placeholder(R.drawable.ic_arrow_back).into(imageView);
         textView.setText(countryItem.getInfo());
     }
 
     public void displayResorce(String info, String uri) {
         imageView.loadUrl(uri);
-     //   Glide.with(imageView).load(uri).placeholder(R.drawable.ic_arrow_back).into(imageView);
+        //   Glide.with(imageView).load(uri).placeholder(R.drawable.ic_arrow_back).into(imageView);
         textView.setText(info);
     }
 }

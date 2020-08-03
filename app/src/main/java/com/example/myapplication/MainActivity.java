@@ -26,6 +26,7 @@ import com.example.myapplication.fragment.FragmentViewer;
 import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
 import com.example.myapplication.utils.KeyboardUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Response;
@@ -82,7 +83,11 @@ public class MainActivity extends BaseActivity {
         if (inLandscapeMode) {
             fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_viewer);
         }
-
+        getDatabase().countryItemDao().getAll().observe(this, countryItems -> {
+            fragmentChooser.clearCountryItems();
+            fragmentChooser.addAll(countryItems);
+            // adapter.notifyDataSetChanged();
+        });
 
     }
 
@@ -121,14 +126,12 @@ public class MainActivity extends BaseActivity {
             public void success(Response<List<CountryItem>> response) {
                 if (!response.isSuccessful()) {
                     if (response.body() != null) {
-                        fragmentChooser.clearCountryItems();
-                        fragmentChooser.addAll(response.body());
+                        updateData(response.body());
                     }
                     fragmentChooser.hideProgressBlock();
                 }
                 if (response.body() != null) {
-                    fragmentChooser.clearCountryItems();
-                    fragmentChooser.addAll(response.body());
+                    updateData(response.body());
                 }
                 fragmentChooser.hideProgressBlock();
             }
@@ -144,6 +147,15 @@ public class MainActivity extends BaseActivity {
             }
 
 
+        });
+    }
+
+    private void updateData(List<CountryItem> list) {
+        getDatabase().countryItemDao().deleteAll();
+        getDatabase().countryItemDao().insert(list);
+        getDatabase().countryItemDao().getAll().observe(this, countryItems -> {
+            fragmentChooser.clearCountryItems();
+            fragmentChooser.addAll(countryItems);
         });
     }
 
