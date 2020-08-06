@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -39,6 +42,7 @@ public class MainActivity extends BaseActivity {
     private boolean inLandscapeMode;
     private AppCompatEditText nameCountry;
     private AppCompatButton startSearch;
+    Menu menu;
 
 
     @Override
@@ -46,12 +50,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initToolbar(getString(R.string.main_activity_title));
-        initHistoryButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHistory();
-            }
-        });
         inLandscapeMode = findViewById(R.id.fragment_viewer) != null;
         fragmentChooser = (FragmentChooser) getSupportFragmentManager().findFragmentById(R.id.fragment_chooser);
         nameCountry = findViewById(R.id.country_name);
@@ -88,9 +86,16 @@ public class MainActivity extends BaseActivity {
             fragmentChooser.addAll(countryItems);
             // adapter.notifyDataSetChanged();
         });
+        menu = getToolbar().getMenu();
+        menu.clear();
+        menu.add(R.string.history);
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        showHistory();
+        return true;
+    }
 
     private void displaySelected(CountryItem countryItem) {
         if (inLandscapeMode) {

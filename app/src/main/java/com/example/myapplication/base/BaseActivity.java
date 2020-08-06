@@ -15,11 +15,6 @@ public class BaseActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    public AppCompatButton initHistoryButton() {
-        AppCompatButton historyButton = findViewById(R.id.history);
-        historyButton.setVisibility(View.VISIBLE);
-        return historyButton;
-    }
 
     public void initToolbarWithNavigation(String title) {
         toolbar = findViewById(R.id.toolbar);
