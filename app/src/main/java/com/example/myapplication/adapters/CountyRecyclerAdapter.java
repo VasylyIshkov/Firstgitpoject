@@ -1,6 +1,8 @@
 package com.example.myapplication.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +11,20 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.RequestBuilder;
 import com.example.myapplication.R;
 import com.example.myapplication.classes.CountryItem;
 import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
+import com.example.myapplication.svg.GlideApp;
+import com.example.myapplication.svg.SvgSoftwareLayerSetter;
 
 import java.util.ArrayList;
 
 import static android.util.Log.DEBUG;
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAdapter.ViewHolder> {
 
@@ -54,7 +61,15 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
         Log.println(DEBUG, "Errrr", countryItems.get(position).getFlag());
 
         // Glide.with(holder.flag).load(countryItems.get(position).getFlag()).placeholder(R.drawable.ic_arrow_back).into(holder.flag);
-        holder.flag.loadUrl(countryItems.get(position).getFlag());
+       // holder.flag.loadUrl(countryItems.get(position).getFlag());
+        RequestBuilder requestBuilder;
+        requestBuilder =
+                GlideApp.with(holder.container.getContext())
+                        .as(PictureDrawable.class)
+                        .transition(withCrossFade())
+                        .listener(new SvgSoftwareLayerSetter());
+        Uri newUri = Uri.parse(countryItems.get(position).getFlag());
+        requestBuilder.load(newUri).into(holder.flag);
         //  holder.flag.setImageURI(Uri.parse(countryItems.get(position).getFlag()));
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +109,7 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView region;
-        WebView flag;
+        AppCompatImageView flag;
         View divider;
         View container;
 
