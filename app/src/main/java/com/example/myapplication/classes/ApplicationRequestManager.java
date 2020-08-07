@@ -2,6 +2,7 @@ package com.example.myapplication.classes;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.SyncStateContract;
 import android.util.Log;
 
 import com.example.myapplication.Constants;
@@ -9,6 +10,10 @@ import com.example.myapplication.Constants;
 import java.util.ArrayList;
 
 public class ApplicationRequestManager {
+    private Context context;
+    public ApplicationRequestManager(Context context){
+        this.context = context;
+    }
     private static SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE);
     }
