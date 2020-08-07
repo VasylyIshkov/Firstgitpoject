@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.myapplication.base.BasePresenter;
 import com.example.myapplication.base.BaseView;
+import com.example.myapplication.classes.ApplicationRequestManager;
 import com.example.myapplication.classes.CountryItem;
 
 import java.util.List;
@@ -24,6 +25,6 @@ public interface ChooserContract {
     interface Presenter extends BasePresenter<View> {
 
         void searchRepos(@NonNull String query);
-
+        ApplicationRequestManager getManager();
     }
 }

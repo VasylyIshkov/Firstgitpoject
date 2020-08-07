@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
@@ -22,15 +24,21 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.AddPhone;
+import com.example.myapplication.Constants;
 import com.example.myapplication.R;
+import com.example.myapplication.SecondActivity;
 import com.example.myapplication.adapters.CountyRecyclerAdapter;
 import com.example.myapplication.base.BaseFragment;
+import com.example.myapplication.classes.ApplicationRequestManager;
 import com.example.myapplication.classes.CountryItem;
 import com.example.myapplication.listeners.OnCountryRecyclerItemClickListener;
 import com.example.myapplication.utils.KeyboardUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.app.Activity.RESULT_CANCELED;
 
 public class FragmentChooser extends BaseFragment implements ChooserContract.View {
 
@@ -85,6 +93,7 @@ public class FragmentChooser extends BaseFragment implements ChooserContract.Vie
         menu.clear();
         menu.add(R.string.history);
 
+
         countryItems = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_view);
 
@@ -92,6 +101,7 @@ public class FragmentChooser extends BaseFragment implements ChooserContract.Vie
             @Override
             public void onItemClick(View view, int position) {
 //ShowFullInfo
+                showFullInfo(position);
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -101,6 +111,32 @@ public class FragmentChooser extends BaseFragment implements ChooserContract.Vie
         presenter.takeView(this);
         return view;
 
+    }
+    private void showFullInfo(int position){
+        Intent intent = new Intent(getActivity(), SecondActivity.class);
+            intent.putExtra(Constants.COUNTRY_INFO, countryItems.get(position).getInfo());
+            intent.putExtra(Constants.FLAG_URI, countryItems.get(position).getFlag());
+            startActivity(intent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        showHistory();
+        return true;
+    }
+    private void showHistory() {
+        Intent intent = new Intent(getActivity(), AddPhone.class);
+        intent.putExtra(Constants.CHOOSE_REQUEST, presenter.getManager().getArrayPRequest(getContext()));
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_CANCELED) {
+            String result = data.getStringExtra(Constants.CHOOSE_REQUEST);
+            searchQuery.setText(result);
+            presenter.searchRepos(result);
+        }
     }
 
     public CountyRecyclerAdapter getCountyRecyclerAdapter() {

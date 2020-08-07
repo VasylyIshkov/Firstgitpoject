@@ -28,6 +28,10 @@ public class ChooserPresenter implements ChooserContract.Presenter {
         this.database = database;
     }
 
+    public ApplicationRequestManager getManager() {
+        return manager;
+    }
+
     @Override
     public void searchRepos(@NonNull String query) {
         if (query.trim().isEmpty()) {
