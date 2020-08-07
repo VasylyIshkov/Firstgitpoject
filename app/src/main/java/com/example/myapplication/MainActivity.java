@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,11 +40,8 @@ import retrofit2.Response;
 public class MainActivity extends BaseActivity {
     private FragmentViewer fragmentViewer;
     private FragmentChooser fragmentChooser;
-    private RecyclerView recyclerView;
     private boolean inLandscapeMode;
-    private AppCompatEditText nameCountry;
-    private AppCompatButton startSearch;
-    Menu menu;
+    private FrameLayout conteiner,conteinerViewer;
 
 
     @Override
@@ -51,11 +49,16 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         inLandscapeMode = findViewById(R.id.fragment_viewer) != null;
-        fragmentChooser.setPresenter(new ChooserPresenter(new ApplicationRequestManager(MainActivity.this),getDatabase()));
-        fragmentChooser = (FragmentChooser) getSupportFragmentManager().findFragmentById(R.id.fragment_chooser);
-       // fragmentChooser.setOnCountryRecyclerItemClickListener(onCountryRecyclerItemClickListener);
+        conteiner = findViewById(R.id.container_fragment);
+        fragmentChooser = new FragmentChooser();
+        fragmentChooser.setPresenter(new ChooserPresenter(new ApplicationRequestManager(MainActivity.this), getDatabase()));
+        getSupportFragmentManager().beginTransaction().add(conteiner.getId(), fragmentChooser).commit();///???
+        // fragmentChooser = (FragmentChooser) getSupportFragmentManager().findFragmentById(R.id.fragment_chooser);
+        // fragmentChooser.setOnCountryRecyclerItemClickListener(onCountryRecyclerItemClickListener);
         if (inLandscapeMode) {
-            fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_viewer);
+            conteinerViewer = findViewById(R.id.fragment_viewer);
+            fragmentViewer = new FragmentViewer();
+            getSupportFragmentManager().beginTransaction().add(conteinerViewer.getId(), fragmentViewer).commit();///???
         }
 //        menu = getToolbar().getMenu();
 //        menu.clear();

@@ -14,29 +14,29 @@ public class ApplicationRequestManager {
     public ApplicationRequestManager(Context context){
         this.context = context;
     }
-    private static SharedPreferences getPrefs(Context context) {
+    private  SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE);
     }
 
-    public static void setRequest(String value, Context context) {
+    public  void setRequest(String value) {
         getPrefs(context).edit().putString(Constants.REQUEST_ARRAY + "_" + getArraySize(context), value).apply();
         setArraySize(context);
 
     }
 
-    public static String getRequest(Context context, int id) {
+    public String getRequest(Context context, int id) {
         return getPrefs(context).getString(Constants.REQUEST_ARRAY + "_" + id, null);
     }
 
-    private static void setArraySize(Context context) {
+    private  void setArraySize(Context context) {
         getPrefs(context).edit().putInt(Constants.ARR_SIZE, (getArraySize(context) + 1)).apply();
     }
 
-    private static int getArraySize(Context context) {
+    private  int getArraySize(Context context) {
         return getPrefs(context).getInt(Constants.ARR_SIZE, 0);
     }
 
-    public static ArrayList<String> getArrayPRequest(Context context) {
+    public  ArrayList<String> getArrayPRequest(Context context) {
         int size = getArraySize(context);
         ArrayList<String> array = new ArrayList<>();
         for (int i = 0; i < size; i++) {

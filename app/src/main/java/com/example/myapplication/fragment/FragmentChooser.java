@@ -60,7 +60,9 @@ public class FragmentChooser extends BaseFragment implements ChooserContract.Vie
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chooser, container, false);
-        //  initFragment(view);
+        String title = getString(R.string.main_activity_title);
+        Log.println(Log.DEBUG,"Errr",title);
+        initToolbar(title, view);
         searchQuery = view.findViewById(R.id.country_name);
         searchQuery.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -180,9 +182,9 @@ public class FragmentChooser extends BaseFragment implements ChooserContract.Vie
     public void observeItems(LiveData<List<CountryItem>> itemsLiveData) {
         itemsLiveData.observe(FragmentChooser.this, new Observer<List<CountryItem>>() {
             @Override
-            public void onChanged(List<CountryItem> countryItems) {
+            public void onChanged(List<CountryItem> countryItem) {
                 countryItems.clear();
-                countryItems.addAll(countryItems);
+                countryItems.addAll(countryItem);
                 countyRecyclerAdapter.notifyDataSetChanged();
             }
         });
@@ -193,9 +195,10 @@ public class FragmentChooser extends BaseFragment implements ChooserContract.Vie
         liveRepoData.removeObservers(FragmentChooser.this);
     }
 
+
     @Override
     public void setPresenter(ChooserContract.Presenter presenter) {
-
+this.presenter = presenter;
     }
 
     @Override

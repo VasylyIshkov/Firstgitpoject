@@ -13,7 +13,7 @@ public class SecondActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        initToolbarWithNavigation(getString(R.string.second_activity_title));
+        //initToolbarWithNavigation(getString(R.string.second_activity_title));
         fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_viewer);
         String countryInfo = getIntent().getStringExtra(Constants.COUNTRY_INFO);
         String flagUri = getIntent().getStringExtra(Constants.FLAG_URI);

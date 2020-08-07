@@ -35,7 +35,7 @@ public class AddPhone extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_test);
         String tittle = getString(R.string.history);
-        initToolbarWithNavigation(tittle);
+        //initToolbarWithNavigation(tittle);
         recyclerView = findViewById(R.id.history_list);
         historyList = getIntent().getStringArrayListExtra(Constants.CHOOSE_REQUEST);
         HistoryRecyclerAdapter adapter = new HistoryRecyclerAdapter(historyList, this, listener);
