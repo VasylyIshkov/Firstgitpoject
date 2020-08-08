@@ -30,6 +30,7 @@ public interface ChooserContract {
     interface Presenter extends BasePresenter<View> {
 
         void searchRepos(@NonNull String query);
+
         ApplicationRequestManager getManager();
     }
 }

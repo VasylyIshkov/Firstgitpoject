@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.example.myapplication.base.BaseActivity;
-import com.example.myapplication.classes.ApplicationRequestManager;
-import com.example.myapplication.fragment.ChooserPresenter;
-import com.example.myapplication.fragment.FragmentChooser;
 import com.example.myapplication.fragment.FragmentViewer;
 import com.example.myapplication.fragment.ViewerPresenter;
 

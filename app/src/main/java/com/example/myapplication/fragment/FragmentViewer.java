@@ -7,25 +7,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.model.StreamEncoder;
-import com.caverock.androidsvg.SVG;
 import com.example.myapplication.Constants;
 import com.example.myapplication.R;
 import com.example.myapplication.base.BaseFragment;
-import com.example.myapplication.classes.CountryItem;
 import com.example.myapplication.svg.GlideApp;
 import com.example.myapplication.svg.SvgSoftwareLayerSetter;
-
-import java.io.InputStream;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -62,7 +53,7 @@ public class FragmentViewer extends BaseFragment implements ViewerContract.View 
             presenter.takeView(this);
             String countryInfo = getActivity().getIntent().getStringExtra(Constants.COUNTRY_INFO);
             String flagUri = getActivity().getIntent().getStringExtra(Constants.FLAG_URI);
-            if(!countryInfo.equals(null)) {
+            if (!countryInfo.equals(null)) {
                 presenter.setData(flagUri, countryInfo);
                 showInfo();
             }
@@ -73,12 +64,6 @@ public class FragmentViewer extends BaseFragment implements ViewerContract.View 
         return view;
     }
 
-//    public void displayResorce(CountryItem countryItem) {
-//        Uri uri = Uri.parse(countryItem.getFlag());
-//        requestBuilder.load(uri).into(imageView);
-//        textView.setText(countryItem.getInfo());
-//    }
-
     public void displayResorce(String info, Uri uri) {
         textView.setText(info);
         requestBuilder.load(uri).into(imageView);
@@ -86,7 +71,7 @@ public class FragmentViewer extends BaseFragment implements ViewerContract.View 
 
     @Override
     public void showInfo() {
-        displayResorce(presenter.getInfo(),presenter.getUri());
+        displayResorce(presenter.getInfo(), presenter.getUri());
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.example.myapplication.fragment;
 
-import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;

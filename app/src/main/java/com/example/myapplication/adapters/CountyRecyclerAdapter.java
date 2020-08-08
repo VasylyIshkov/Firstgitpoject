@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,7 +60,7 @@ public class CountyRecyclerAdapter extends RecyclerView.Adapter<CountyRecyclerAd
         Log.println(DEBUG, "Errrr", countryItems.get(position).getFlag());
 
         // Glide.with(holder.flag).load(countryItems.get(position).getFlag()).placeholder(R.drawable.ic_arrow_back).into(holder.flag);
-       // holder.flag.loadUrl(countryItems.get(position).getFlag());
+        // holder.flag.loadUrl(countryItems.get(position).getFlag());
         RequestBuilder requestBuilder;
         requestBuilder =
                 GlideApp.with(holder.container.getContext())
