@@ -10,4 +10,5 @@
     <dimen name="list_item_height">52dp</dimen>
     <dimen name="icon_size">56dp</dimen>
     <dimen name="btn_in_toolbar">40dp</dimen>
+    <dimen name="recycler_fragment_main_margin_top">48dp</dimen>
 </resources>
