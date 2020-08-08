@@ -12,6 +12,11 @@ import java.util.List;
 
 public interface ChooserContract {
     interface View extends BaseView<Presenter> {
+        void showProgress();
+
+        void hideProgress();
+
+        void hideKeyboard();
 
         void showInputError();
 

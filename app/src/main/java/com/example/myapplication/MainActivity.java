@@ -21,7 +21,7 @@ public class MainActivity extends BaseActivity {
         conteiner = findViewById(R.id.fragment_container);
         fragmentChooser = new FragmentChooser();
         fragmentChooser.setPresenter(new ChooserPresenter(new ApplicationRequestManager(MainActivity.this), getDatabase()));
-        getSupportFragmentManager().beginTransaction().add(conteiner.getId(), fragmentChooser).commit();///???
+        getSupportFragmentManager().beginTransaction().add(conteiner.getId(), fragmentChooser).commit();
 
     }
 }
